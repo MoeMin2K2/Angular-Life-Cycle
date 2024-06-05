@@ -1,0 +1,67 @@
+
+<div class="container">
+    <h2>Registration Form</h2>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit(registrationForm)">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input placeholder="John Doe" type="text" id="username" name="username" class="form-control" ngModel required #fname="ngModel" minlength="3" pattern="^[a-zA-Z\s]*$">
+        <span *ngIf="fname.invalid && fname.touched">
+          <small style="color: red;">
+            <i *ngIf="fname.errors?.['required']">*Please enter your name!</i>
+            <i *ngIf="fname.errors?.['pattern']">*Name must be include only characters but not number!</i>
+            <i *ngIf="fname.errors?.['minlength']">*Name must be include 3 characters!</i>
+          </small>
+        </span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input placeholder="john@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" type="email" id="email" name="email" class="form-control" ngModel required #fmail="ngModel">
+        <span *ngIf="fmail.invalid && fmail.touched">
+          <small style="color: red;">
+            <i *ngIf="fmail.errors?.['required']">*Please enter your email address!</i>
+            <i *ngIf="fmail.errors?.['pattern']">*example123.gmail.com</i>
+          </small>
+        </span>
+      </div>
+  
+      <div class="form-group">
+        <label>Gender:</label>
+        <div>
+          <label><input type="radio" name="gender" value="Male" ngModel required> Male</label>
+          <label><input type="radio" name="gender" value="Female" ngModel required> Female</label>
+          <label><input type="radio" name="gender" value="Other" ngModel required> Other</label>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input placeholder="09111222333" type="text" id="phone" name="phone" class="form-control" ngModel required #fnum="ngModel" pattern="^[0-9]*$" maxlength="11" minlength="10" >
+        <span *ngIf="fnum.invalid && fnum.touched">
+          <small style="color: red;">
+            <i *ngIf="fnum.errors?.['required']">*Please enter your phone number!</i>
+            <i *ngIf="fnum.errors?.['minlength']">*Length must be 10-11!</i>
+          </small>
+        </span>
+      </div>
+  
+      <div class="form-group">
+        <label for="dob">Date of Birth: <span *ngIf="age !== null">{{age}} Year</span></label>
+        <input type="date" id="dob" name="dob" class="form-control" ngModel required (change)="onDateChange($event)">
+      </div>
+  
+      <div class="form-group">
+        <label for="course">Course:</label>
+        <select id="course" name="course" class="form-control" ngModel required #fcou="ngModel">
+          <option value="" disabled selected hidden>Select a course</option>
+          <option value="engineering">Engineering</option>
+          <option value="medicine">Medicine</option>
+          <option value="arts">Arts</option>
+          <option value="science">Science</option>
+        </select>
+        <span *ngIf="fcou.invalid && fcou.touched"><small style="color: red;"><i>*Please Select One Course!</i></small></span>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!registrationForm.valid">Submit</button>
+    </form>
+</div>
+  

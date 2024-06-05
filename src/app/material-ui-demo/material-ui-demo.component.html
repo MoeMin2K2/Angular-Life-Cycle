@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="left-side">
+
+  </div>
+  <div class="right-side">
+    <div class="login-header">
+      <img src="https://www.blue-stone.net/web/image/res.company/1/logo?unique=01c8cfc" alt="Company Logo"
+        class="company-logo">
+      <h2>Welcome Back</h2>
+      <span><small>Please login to your account</small></span>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="fill" class="full-width" id="field-one">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.get('email')?.errors?.['required']">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="form.get('email')?.errors?.['email']">
+          Enter a valid email
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password">
+        <mat-error *ngIf="form.get('password')?.errors?.['required']">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="form.get('password')?.errors?.['minLength']">
+          Password must be at least 6 characters
+        </mat-error>
+      </mat-form-field>
+      <div class="forgot-password-container">
+        <a href="#" class="forgot-password-link">Forgot password?</a>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="full-width">
+        Login
+      </button>
+    </form>
+    <div class="login-footer">
+      <div class="separator-container">
+        <div class="line"></div>
+        <span class="separator-text">Or Login With</span>
+        <div class="line"></div>
+      </div>
+      <div class="social-links">
+        <a href="#"><img src="https://i.pinimg.com/236x/25/ea/59/25ea5941311b06c6cec08f99bf5d72a5.jpg"
+            alt="Facebook"></a>
+        <a href="#"><img src="https://i.pinimg.com/236x/e9/58/5d/e9585dd0d277236b30953bca60761072.jpg"
+            alt="Twitter"></a>
+        <a href="#"><img src="https://i.pinimg.com/236x/b0/28/c2/b028c2e59043116dfc0da6ec6fd26d70.jpg"
+            alt="LinkedIn"></a>
+      </div>
+      <a href="#" class="sign-up-link">Don't have an account? Sign up</a>
+    </div>
+  </div>
+</div>
