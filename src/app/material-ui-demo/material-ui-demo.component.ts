@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MaterialUiDemoComponent {
   form: FormGroup;
+  isValid: boolean = false;
 
   user = {
     name: "Moe Min Oo",
@@ -24,8 +25,8 @@ export class MaterialUiDemoComponent {
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
     });
   }
 
@@ -35,6 +36,37 @@ export class MaterialUiDemoComponent {
     const password = this.user.password;
     const confirmPassword = detail.get('password')?.value;
     return (email === confirmEmail) && (password === confirmPassword);
+  }
+
+  isInvalid(field: string): boolean {
+    const validation = this.form.get(field);
+    if (validation && validation.invalid && (validation.dirty || validation.touched)) {
+      return !this.isValid;
+    } else
+      return this.isValid;
+  }
+
+  invalidMessage(field: string): string {
+    console.log("Field: ", field);
+    const validation = this.form.get(field);
+    if (validation && validation.errors) {
+      if (validation.errors['required']) {
+        return `Field is required`;
+      } else if (validation.errors['minlength']) {
+        const minLength = validation.errors['minlength'].requiredLength;
+        return `Minimum length is ${minLength} characters`;
+      } else if (validation.errors['maxlength']) {
+        const maxlength = validation.errors['maxlength'].requiredLength;
+        return `Maximum length is ${maxlength} characters`;
+      } else if (validation.errors['pattern']) {
+        switch (field) {
+          case "email": return `Enter a valid ${field}.(eg. john@gmail.com)`;
+          case "password": return `Password must be strong.(eg. @pp!3S)`;
+          default: return '';
+        }
+      }
+    }
+    return '';
   }
 
   onSubmit() {

@@ -13,22 +13,16 @@
       <mat-form-field appearance="fill" class="full-width" id="field-one">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
-        <mat-error *ngIf="form.get('email')?.errors?.['required']">
-          Email is required
-        </mat-error>
-        <mat-error *ngIf="form.get('email')?.errors?.['email']">
-          Enter a valid email
+        <mat-error *ngIf="isInvalid('email')">
+          {{invalidMessage('email')}}
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password">
-        <mat-error *ngIf="form.get('password')?.errors?.['required']">
-          Password is required
-        </mat-error>
-        <mat-error *ngIf="form.get('password')?.errors?.['minLength']">
-          Password must be at least 6 characters
+        <mat-error *ngIf="isInvalid('password')">
+          {{invalidMessage('password')}}
         </mat-error>
       </mat-form-field>
       <div class="forgot-password-container">
@@ -45,9 +39,13 @@
         <div class="line"></div>
       </div>
       <div class="social-links">
+        <a href="#"><img src="https://i.pinimg.com/236x/eb/c5/6b/ebc56b19e4bf15720b426a991eb5d731.jpg"
+          alt="Google"></a>
         <a href="#"><img src="https://i.pinimg.com/236x/25/ea/59/25ea5941311b06c6cec08f99bf5d72a5.jpg"
             alt="Facebook"></a>
-        <a href="#"><img src="https://i.pinimg.com/236x/e9/58/5d/e9585dd0d277236b30953bca60761072.jpg"
+        <a href="#"><img src="https://i.pinimg.com/236x/f4/1e/2d/f41e2dab621c1ee5253cef74e3642fcf.jpg"
+            alt="Instagram"></a>
+        <a href="#"><img src="https://i.pinimg.com/236x/fe/d1/8b/fed18bb91b8dc219bff8cee283d0f988.jpg"
             alt="Twitter"></a>
         <a href="#"><img src="https://i.pinimg.com/236x/b0/28/c2/b028c2e59043116dfc0da6ec6fd26d70.jpg"
             alt="LinkedIn"></a>
