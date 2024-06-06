@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-material-ui-demo',
@@ -23,19 +24,15 @@ export class MaterialUiDemoComponent {
     password: "P@ss1234"
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
-      password: ['', [Validators.required, Validators.minLength(6),Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
     });
   }
 
   comfirmDetails(detail: FormGroup): boolean {
-    const email = this.user.email;
-    const confirmEmail = detail.get('email')?.value;
-    const password = this.user.password;
-    const confirmPassword = detail.get('password')?.value;
-    return (email === confirmEmail) && (password === confirmPassword);
+    return (this.user.email === detail.get('email')?.value) && (this.user.password === detail.get('password')?.value);
   }
 
   isInvalid(field: string): boolean {
@@ -73,9 +70,9 @@ export class MaterialUiDemoComponent {
     if (this.form.valid) {
       console.log('Form Submitted', this.form.value);
       if (this.comfirmDetails(this.form)) {
-        alert(`Dear ${this.user.name}. You Login Successfull.`);
+        this.snackBar.open(`Dear ${this.user.name}, you login successful!`, "Close", { duration: 3000 });
       } else {
-        alert("Please Try Again")
+        this.snackBar.open(`Oop! Something went wrong.`, "Close", { duration: 3000 });
       }
     }
   }

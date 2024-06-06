@@ -6,6 +6,8 @@ import { TemplateDrivenFormComponent } from './template-driven-form/template-dri
 import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialUiDemoComponent } from './material-ui-demo/material-ui-demo.component';
+import { MatTableDemoComponent } from "./mat-table-demo/mat-table-demo.component";
+import { BookListComponent } from "./service-demo/book-list/book-list.component";
 
 
 @Component({
@@ -13,7 +15,7 @@ import { MaterialUiDemoComponent } from './material-ui-demo/material-ui-demo.com
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [MaterialUiDemoComponent,ReactiveFormsModule,RouterOutlet, ParentComponent, ChildComponent,TemplateDrivenFormComponent, ReactiveFormComponent]
+    imports: [MaterialUiDemoComponent, ReactiveFormsModule, RouterOutlet, ParentComponent, ChildComponent, TemplateDrivenFormComponent, ReactiveFormComponent, MatTableDemoComponent, BookListComponent]
 })
 export class AppComponent {
   title = 'life-cycle';

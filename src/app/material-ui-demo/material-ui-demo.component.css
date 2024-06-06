@@ -18,7 +18,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
-    margin: 10px auto;
+    margin: 30px auto;
     padding: 20px;
 }
 
@@ -52,10 +52,10 @@ body {
 }
 
 .login-header h2 {
-    font-family: 'Georgia', serif;
+    font-family: 'Roboto';
     font-size: 33px;
     font-weight: bold;
-    color: #2575fc;
+    color: #007bff;
     margin-bottom: 5px;
 }
 
@@ -116,12 +116,12 @@ button:disabled {
 }
 
 button:not(:disabled) {
-    background-color: #6a11cb;
+    background-color: #2575fc;
     color: white;
 }
 
 button:not(:disabled):hover {
-    background-color: #2575fc;
+    background-color: #0b47af;
 }
 
 .login-footer {
@@ -170,13 +170,14 @@ button:not(:disabled):hover {
 
 .line {
     flex-grow: 1;
-    height: 1px;
-    background-color: #333;
+    height: 0.5px;
+    background-color: #4d4d4d;
 }
 
 .separator-text {
     margin: 0 10px;
+    font-size: small;
     font-weight: bold;
-    color: #333;
+    color: #4d4d4d;
     padding: 0 10px;
 }
