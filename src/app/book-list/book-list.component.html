@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="left-side" *ngIf="!editing">
+    <h3 class="title" *ngIf="!selectedBook">Add New Book</h3>
+    <h3 class="title" *ngIf="selectedBook">Book Details</h3>
+    <form *ngIf="!selectedBook" (ngSubmit)="addBook()" class="add-book-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="newBook.title" name="title">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Author</mat-label>
+        <input matInput [(ngModel)]="newBook.author" name="author">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Add</button>
+    </form>
+
+    <div *ngIf="selectedBook" class="book-details">
+      <h3>{{ selectedBook.title }}</h3>
+      <p>by {{ selectedBook.author }}</p>
+      <button mat-raised-button color="primary" (click)="startEditBook(selectedBook)">Edit</button>
+      <button class="btn" mat-raised-button color="warn" (click)="deleteBook(selectedBook.id)">Delete</button>
+      <button class="btn" mat-raised-button (click)="selectedBook = null">Cancel</button>
+    </div>
+  </div>
+
+  <div class="left-side" *ngIf="editing">
+    <h3 class="title">Update Book</h3>
+    <form (ngSubmit)="updateBook()" class="edit-book-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="editBook.title" name="title">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Author</mat-label>
+        <input matInput [(ngModel)]="editBook.author" name="author">
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary" type="submit">Update</button>
+      <button class="btn" mat-raised-button (click)="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+  
+  <div class="right-side">
+    <h2 class="title">Book List</h2>
+    <div class="book-list">
+      <mat-card *ngFor="let book of books" class="book-card">
+        <div class="book-info">
+          <h3>{{ book.title }} <small>by {{ book.author }}</small></h3>
+        </div>
+        <button mat-raised-button color="primary" (click)="viewBook(book.id)">View</button>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+

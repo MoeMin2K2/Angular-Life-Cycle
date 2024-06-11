@@ -1,0 +1,109 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.left-side {
+  flex: 0 0 30%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  height: fit-content;
+}
+
+.right-side {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.book-info {
+  margin-bottom: 20px;
+}
+
+.book-info h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+.book-info small {
+  font-size: 16px;
+  color: #777;
+}
+
+.add-book-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+}
+
+.btn{
+  margin-left: 30px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-side,
+  .right-side {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .book-list {
+    grid-template-columns: 1fr;
+  }
+}

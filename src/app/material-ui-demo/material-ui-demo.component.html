@@ -1,6 +1,8 @@
 <div class="container">
   <div class="left-side">
-
+    <h1><strong>Simplify management with our dashboard</strong></h1>
+    <p> <i> Simplify your e-commerce management with our user-friendly user dashboard. </i></p>
+    <img src="../../assets/login1.svg" alt="">
   </div>
   <div class="right-side">
     <div class="login-header">
@@ -9,8 +11,8 @@
       <h2>Welcome Back</h2>
       <span><small>Please login to your account</small></span>
     </div>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
-      <mat-form-field appearance="fill" class="full-width" id="field-one">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <mat-form-field appearance="outline" class="custom-border-radius full-width" id="field-one">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
         <mat-error *ngIf="isInvalid('email')">
@@ -18,7 +20,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill" class="full-width">
+      <mat-form-field appearance="outline" class="custom-border-radius full-width">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password">
         <mat-error *ngIf="isInvalid('password')">
@@ -26,9 +28,9 @@
         </mat-error>
       </mat-form-field>
       <div class="forgot-password-container">
-        <a href="#" class="forgot-password-link">Forgot password?</a>
+        <a href="#" class="forgot-password-link"> Forgot password? </a>
       </div>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid" class="full-width">
+      <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid" class="full-width">
         Login
       </button>
     </form>
@@ -39,8 +41,7 @@
         <div class="line"></div>
       </div>
       <div class="social-links">
-        <a href="#"><img src="https://i.pinimg.com/236x/eb/c5/6b/ebc56b19e4bf15720b426a991eb5d731.jpg"
-          alt="Google"></a>
+        <a href="#"><img src="https://i.pinimg.com/236x/eb/c5/6b/ebc56b19e4bf15720b426a991eb5d731.jpg" alt="Google"></a>
         <a href="#"><img src="https://i.pinimg.com/236x/25/ea/59/25ea5941311b06c6cec08f99bf5d72a5.jpg"
             alt="Facebook"></a>
         <a href="#"><img src="https://i.pinimg.com/236x/f4/1e/2d/f41e2dab621c1ee5253cef74e3642fcf.jpg"
@@ -50,7 +51,7 @@
         <a href="#"><img src="https://i.pinimg.com/236x/b0/28/c2/b028c2e59043116dfc0da6ec6fd26d70.jpg"
             alt="LinkedIn"></a>
       </div>
-      <a href="#" class="sign-up-link">Don't have an account? Sign up</a>
+      <a href="#" class="sign-up-link"> Don't have an account? Sign Up </a>
     </div>
   </div>
 </div>

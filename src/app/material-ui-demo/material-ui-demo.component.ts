@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-material-ui-demo',
@@ -15,7 +16,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './material-ui-demo.component.css'
 })
 export class MaterialUiDemoComponent {
-  form: FormGroup;
+  loginForm: FormGroup;
   isValid: boolean = false;
 
   user = {
@@ -24,8 +25,8 @@ export class MaterialUiDemoComponent {
     password: "P@ss1234"
   };
 
-  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
-    this.form = this.fb.group({
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar , private router: Router) {
+    this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
     });
@@ -36,7 +37,7 @@ export class MaterialUiDemoComponent {
   }
 
   isInvalid(field: string): boolean {
-    const validation = this.form.get(field);
+    const validation = this.loginForm.get(field);
     if (validation && validation.invalid && (validation.dirty || validation.touched)) {
       return !this.isValid;
     } else
@@ -45,7 +46,7 @@ export class MaterialUiDemoComponent {
 
   invalidMessage(field: string): string {
     console.log("Field: ", field);
-    const validation = this.form.get(field);
+    const validation = this.loginForm.get(field);
     if (validation && validation.errors) {
       if (validation.errors['required']) {
         return `Field is required`;
@@ -67,10 +68,11 @@ export class MaterialUiDemoComponent {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      console.log('Form Submitted', this.form.value);
-      if (this.comfirmDetails(this.form)) {
+    if (this.loginForm.valid) {
+      console.log('Form Submitted', this.loginForm.value);
+      if (this.comfirmDetails(this.loginForm)) {
         this.snackBar.open(`Dear ${this.user.name}, you login successful!`, "Close", { duration: 3000 });
+        this.router.navigate(['/book-list']);
       } else {
         this.snackBar.open(`Oop! Something went wrong.`, "Close", { duration: 3000 });
       }
