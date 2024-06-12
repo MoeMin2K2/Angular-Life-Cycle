@@ -13,6 +13,14 @@ const URL = 'http://localhost:3000/books/';
   providedIn: 'root'
 })
 export class BookService {
+
+  isLoggedIn(): boolean {
+    console.log("Token",sessionStorage.getItem('token'));
+    const token = localStorage.getItem('token');
+    return token != null; 
+    // return !!sessionStorage.getItem('token'); !! return boolean if token present return true, if not or null return false
+  }
+
   constructor(private http: HttpClient) {}
 
   getBooks() {

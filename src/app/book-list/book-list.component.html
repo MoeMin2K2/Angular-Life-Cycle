@@ -11,7 +11,11 @@
         <mat-label>Author</mat-label>
         <input matInput [(ngModel)]="newBook.author" name="author">
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Add</button>
+      <!-- <button mat-raised-button color="primary" type="submit">Add</button> -->
+      <div class="add-field-buttons">
+        <button mat-raised-button color="primary" type="submit">Add</button>
+        <button class="btn" mat-raised-button type="button" (click)="goBack()">Back</button>
+      </div>
     </form>
 
     <div *ngIf="selectedBook" class="book-details">
@@ -45,7 +49,7 @@
     <div class="book-list">
       <mat-card *ngFor="let book of books" class="book-card">
         <div class="book-info">
-          <h3>{{ book.title }} <small>by {{ book.author }}</small></h3>
+          <h3>{{ book.title | upperFirstCharacter }} <small>by {{ book.author | upperFirstCharacter }}</small></h3>
         </div>
         <button mat-raised-button color="primary" (click)="viewBook(book.id)">View</button>
       </mat-card>

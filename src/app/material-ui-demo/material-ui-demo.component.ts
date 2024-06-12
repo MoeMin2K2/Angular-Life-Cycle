@@ -25,7 +25,7 @@ export class MaterialUiDemoComponent {
     password: "P@ss1234"
   };
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar , private router: Router) {
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)]]
@@ -67,12 +67,24 @@ export class MaterialUiDemoComponent {
     return '';
   }
 
+  tokenChar: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_+$";
+  randomToken() {
+    let token: string = "";
+    for (let i = 0; i < 10; i++) {
+      token += this.tokenChar.charAt(Math.floor(Math.random() * this.tokenChar.length))
+    }
+    return token;
+  }
+
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Form Submitted', this.loginForm.value);
       if (this.comfirmDetails(this.loginForm)) {
+        // const token = 'loginsuccessfully';
+        localStorage.setItem('token', this.randomToken());
+        console.log("After Submitted Token: ", localStorage.getItem('token'));
         this.snackBar.open(`Dear ${this.user.name}, you login successful!`, "Close", { duration: 3000 });
-        this.router.navigate(['/book-list']);
+        this.router.navigate(['/welcome']);
       } else {
         this.snackBar.open(`Oop! Something went wrong.`, "Close", { duration: 3000 });
       }

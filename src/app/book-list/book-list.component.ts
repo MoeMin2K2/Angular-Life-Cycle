@@ -7,13 +7,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
+import { CustomPipePipe } from "../custom-pipe.pipe";
 
 @Component({
-  selector: 'app-book-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule],
-  templateUrl: './book-list.component.html',
-  styleUrl: './book-list.component.css'
+    selector: 'app-book-list',
+    standalone: true,
+    templateUrl: './book-list.component.html',
+    styleUrl: './book-list.component.css',
+    imports: [CommonModule, FormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatIconModule, MatCardModule, CustomPipePipe]
 })
 
 export class BookListComponent implements OnInit {
@@ -25,7 +27,11 @@ export class BookListComponent implements OnInit {
   editBook: Book = { title: '', author: '' };
   editing: boolean = false;
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService, private router: Router) {}
+
+  goBack(){
+    this.router.navigate(['/welcome']);
+  }
 
   loadBooks(): void {
     this.bookService.getBooks().subscribe((books) => {
@@ -38,9 +44,12 @@ export class BookListComponent implements OnInit {
   }
 
   addBook(): void {
-    this.bookService.addBook(this.newBook).subscribe((book) => {
-      this.books.push(book);
-      console.log("Add Book: ",this.books);
+
+    this.bookService.addBook(this.newBook).subscribe(() => {
+
+      console.log("Add Book: ",this.newBook);
+      this.loadBooks();
+      
       this.newBook = { title: '', author: '' };
     });
   }
@@ -58,32 +67,27 @@ export class BookListComponent implements OnInit {
     this.editing = true;
   }
 
-  updateBook(): void {
-    if (this.editBook && this.editBook.id != null) {
-      this.bookService.updateBook(this.editBook).subscribe((updatedBook) => {
-        //find index of update book
-        const index = this.books.findIndex(book => book.id === updatedBook.id);
-        if (index !== -1) {
-          this.books[index] = updatedBook;
-        }
-        //after update , to show add field
-        this.cancelEdit();
-      });
-    }
-  }
-
+  //load to add field
   cancelEdit(): void {
     this.editBook = { title: '', author: '' };
     this.editing = false;
     this.selectedBook = null;
   }
 
+  updateBook(): void {
+    if (this.editBook && this.editBook.id != null) {
+      this.bookService.updateBook(this.editBook).subscribe((updatedBook) => {
+        console.log("Updated Book: ", this.editBook);
+        this.loadBooks();
+        this.cancelEdit();
+      });
+    }
+  }
+
   deleteBook(id?: number): void {
     console.log("Delete ID: ",  id);
     this.bookService.deleteBook(id).subscribe(() => {
-      //load function called
       this.loadBooks();
-      //after delete , to show add field
       this.cancelEdit();
     });
   }
