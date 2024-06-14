@@ -7,6 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CustomPipePipe implements PipeTransform {
 
   transform(value: string): string {
+    console.log("Value", !value);
     console.log("Value", value);
     if (!value) { return value; }
     else {

@@ -1,34 +1,76 @@
 {
   "books": [
     {
-      "id": "b2e8",
+      "id": "fd96",
       "title": "Sanchaung, Insein, Harvard",
-      "author": "Ma Thida"
+      "author": "Ma Thida",
+      "price": "150,000"
     },
     {
-      "id": "5e54",
-      "title": "The Sunflower",
-      "author": " Ma Thida"
-    },
-    {
-      "id": "aa50",
-      "title": "The Roadmap",
-      "author": "Ma Thida"
-    },
-    {
-      "id": "ec4c",
-      "title": "Taw Lan",
-      "author": "Ludu Daw Amar"
-    },
-    {
-      "id": "1abd",
-      "title": "Kyauk Sone Daung",
-      "author": "Ludu Daw Amar"
-    },
-    {
-      "id": "79f1",
+      "id": "bee6",
       "title": "U Shin Gyi",
-      "author": "Ludu Daw Amar"
+      "author": "Ludu Daw Amar",
+      "price": "1,000,000"
+    },
+    {
+      "id": "b315",
+      "title": "Pa Lei",
+      "author": "Khin Hnin Yu",
+      "price": "500,000"
+    },
+    {
+      "id": "9731",
+      "title": "Emerald Green Dreams",
+      "author": "Nu Nu Yi (Inwa)",
+      "price": "900,000"
+    },
+    {
+      "id": "af34",
+      "title": "The King Of The White Elephant",
+      "author": "Mya Than Tint",
+      "price": "45,000"
+    },
+    {
+      "id": "79b3",
+      "title": "Ludu Ni Ko Khet Hlaing Phan",
+      "author": "Thawda Swe",
+      "price": "4,500,000"
+    },
+    {
+      "id": "9be5",
+      "title": "The Sadness Of The Moon",
+      "author": "Tin Moe",
+      "price": "1,000,000"
+    },
+    {
+      "id": "c9f2",
+      "title": "Yangon Thar (Yangonite)",
+      "author": "Juu",
+      "price": "120,000"
+    },
+    {
+      "id": "1dba",
+      "title": "The River Of Lost Footsteps",
+      "author": "Thant Myint-U",
+      "price": "50,000"
+    },
+    {
+      "id": "18da",
+      "title": "Towards A New Society",
+      "author": "Kyaw Win",
+      "price": "850,000"
+    },
+    {
+      "id": "589e",
+      "title": "Wut Hmone",
+      "author": "Dagon Taya",
+      "price": "350,000"
+    },
+    {
+      "id": "6779",
+      "title": "Bamar A Hsa",
+      "author": "Aung Thinn",
+      "price": "950,000"
     }
   ]
 }

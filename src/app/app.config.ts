@@ -3,9 +3,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomPipePipe } from './custom-pipe.pipe';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(),
-    importProvidersFrom(HttpClientModule)
+    importProvidersFrom(HttpClientModule),importProvidersFrom(CustomPipePipe)
   ]
 };

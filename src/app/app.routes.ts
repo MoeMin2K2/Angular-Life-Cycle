@@ -1,19 +1,15 @@
 import { Routes } from '@angular/router';
-import { MaterialUiDemoComponent } from './material-ui-demo/material-ui-demo.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { BookListComponent } from './book-list/book-list.component';
 import { securityGuard } from './security.guard';
-import { WelcomeComponent } from './welcome/welcome.component';
-
-
 
 export const routes: Routes = [
     { path: '', redirectTo: '/welcome', pathMatch: 'full' },
-    { path: 'welcome', component: WelcomeComponent, canActivate: [securityGuard] },
-    { path: 'login', component: MaterialUiDemoComponent },
-    { path: 'book-list', component: BookListComponent, canActivate: [securityGuard] },
-    // {path: 'book-list' , component : BookListComponent},
-    // {path: 'logout', redirectTo: '/login', pathMatch: 'full'},
-    // {path: 'book-list', loadChildren : () => import ('').then( m => )}
-    { path: '**', component: PageNotFoundComponent }
+    { path: 'welcome', loadChildren: () => import('./welcome/welcome.module').then(m => m.WelcomeModule), canActivate: [securityGuard] },
+    { path: 'login', loadChildren: () => import('./material-ui-demo/material-ui-demo.module').then(m => m.MaterialUiDemoModule) },
+    { path: 'book-list', loadChildren: () => import('./book-list/book-list.module').then(m => m.BookListModule), canActivate: [securityGuard] },
+    { path: '**', loadChildren: () => import('./page-not-found/page-not-found.module').then(m => m.PageNotFoundModule) }
+    // { path: 'welcome', loadChildren: () => import('./welcome/welcome.component').then(m => m.WelcomeComponent), canActivate: [securityGuard] },
+    // { path: 'login', loadChildren: () => import('./material-ui-demo/material-ui-demo.component').then(m => m.MaterialUiDemoComponent) },
+    // { path: 'book-list', loadChildren: () => import('./book-list/book-list.component').then(m => m.BookListComponent), canActivate: [securityGuard] },
+    // { path: '**', loadChildren: () => import('./page-not-found/page-not-found.component').then(m => m.PageNotFoundComponent) }
+
 ];

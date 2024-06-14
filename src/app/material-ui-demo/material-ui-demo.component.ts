@@ -71,7 +71,7 @@ export class MaterialUiDemoComponent {
   randomToken() {
     let token: string = "";
     for (let i = 0; i < 10; i++) {
-      token += this.tokenChar.charAt(Math.floor(Math.random() * this.tokenChar.length))
+      token += this.tokenChar.charAt(Math.floor(Math.random() * this.tokenChar.length)); // (0-1 * 65)
     }
     return token;
   }

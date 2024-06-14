@@ -46,7 +46,7 @@ body {
 .welcome-content button {
   font-size: 16px;
   padding: 10px 20px;
-  transition: background-color 0.3s ease;
+  /* transition: background-color 0.3s ease; */
 }
 
 .welcome-content button:hover {

@@ -5,11 +5,21 @@
     <form *ngIf="!selectedBook" (ngSubmit)="addBook()" class="add-book-form">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="newBook.title" name="title">
+        <!--(ngModelChange)="transformValue($event, 'title')" -->
+        <input matInput [(ngModel)]="newBook.title" (ngModelChange)="upperFirstInputValue($event, 'title')"
+          name="title">
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Author</mat-label>
-        <input matInput [(ngModel)]="newBook.author" name="author">
+        <!-- (ngModelChange)="transformValue($event, 'author')" -->
+        <input matInput [(ngModel)]="newBook.author" (ngModelChange)="upperFirstInputValue($event, 'author')"
+          name="author">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Price</mat-label>
+        <!-- (ngModelChange)="formatNumber($event)" -->
+        <input matInput [(ngModel)]="newBook.price" (ngModelChange)="formatNumber($event, 'price')" name="price">
       </mat-form-field>
       <!-- <button mat-raised-button color="primary" type="submit">Add</button> -->
       <div class="add-field-buttons">
@@ -21,6 +31,7 @@
     <div *ngIf="selectedBook" class="book-details">
       <h3>{{ selectedBook.title }}</h3>
       <p>by {{ selectedBook.author }}</p>
+      <h3>Price: {{selectedBook.price}}</h3>
       <button mat-raised-button color="primary" (click)="startEditBook(selectedBook)">Edit</button>
       <button class="btn" mat-raised-button color="warn" (click)="deleteBook(selectedBook.id)">Delete</button>
       <button class="btn" mat-raised-button (click)="selectedBook = null">Cancel</button>
@@ -32,29 +43,51 @@
     <form (ngSubmit)="updateBook()" class="edit-book-form">
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Title</mat-label>
-        <input matInput [(ngModel)]="editBook.title" name="title">
+        <!-- (ngModelChange)="transformValue($event, 'title', true)" -->
+        <input matInput [(ngModel)]="editBook.title" (ngModelChange)="upperFirstInputValue($event, 'title', true)"
+          name="title">
       </mat-form-field>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>Author</mat-label>
-        <input matInput [(ngModel)]="editBook.author" name="author">
+        <!-- (ngModelChange)="transformValue($event, 'author',true)" -->
+        <input matInput [(ngModel)]="editBook.author" (ngModelChange)="upperFirstInputValue($event, 'author',true)"
+          name="author">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Price</mat-label>
+        <!-- (ngModelChange)="transformValue($event, 'author')" -->
+        <input matInput [(ngModel)]="editBook.price" (ngModelChange)="formatNumber($event, 'price', true)" name="price">
       </mat-form-field>
       <br>
       <button mat-raised-button color="primary" type="submit">Update</button>
       <button class="btn" mat-raised-button (click)="cancelEdit()">Cancel</button>
     </form>
   </div>
-  
+
   <div class="right-side">
     <h2 class="title">Book List</h2>
+
+    <!-- i want to search bar here -->
+
+    <div class="search-bar">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search</mat-label>
+        <!-- [(ngModel)]="searchValue" (ngModelChange)="searchBooks($event)" -->
+        <input matInput (input)="onSearchInputChange($event)" name="searchValue">
+        <!-- (click)="searchBooks(searchValue)" -->
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
     <div class="book-list">
-      <mat-card *ngFor="let book of books" class="book-card">
+      <mat-card *ngFor="let book of books | filter:searchValue" class="book-card">
         <div class="book-info">
-          <h3>{{ book.title | upperFirstCharacter }} <small>by {{ book.author | upperFirstCharacter }}</small></h3>
+          <h3>{{ book.title }} <small>by {{ book.author }}</small></h3>
         </div>
         <button mat-raised-button color="primary" (click)="viewBook(book.id)">View</button>
       </mat-card>
     </div>
   </div>
 </div>
-
-

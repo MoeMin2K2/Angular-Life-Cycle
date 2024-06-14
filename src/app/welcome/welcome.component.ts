@@ -20,7 +20,6 @@ export class WelcomeComponent {
 
     logOut() {
         console.log("Logout Function is Called.")
-        this.router.navigate(['/login']);
         localStorage.removeItem('token');
         console.log("After Logged Out Token: ", localStorage.getItem('token'));
     }
