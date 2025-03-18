@@ -9,7 +9,7 @@ export interface Book {
   price: number;
 }
 
-const URL = 'http://localhost:3000/books/';
+const URL = 'https://courteous-empathy-production.up.railway.app/books/';
 
 @Injectable({
   providedIn: 'root'
